@@ -53,7 +53,7 @@ case class Time(units: TimeUnit) extends Interpretation // DataPoint[TimerSample
 @key("vector")
 case class Vector(labels: Seq[String]) extends Interpretation // DataPoint[Seq[Double]]
 
-case class MetricMetadata(id: MetricId, interpretation: Interpretation)
+case class MetricMetadata(id: DataSourceId, interpretation: Interpretation)
 
 object MetricMetadata {
   implicit class MetaExt(meta: MetricMetadata) {

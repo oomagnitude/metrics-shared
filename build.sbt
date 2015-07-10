@@ -7,7 +7,7 @@ lazy val metrics = crossProject
     version := "0.1-SNAPSHOT",
     scalaVersion := "2.11.6",
     autoCompilerPlugins := true,
-    libraryDependencies += "com.lihaoyi" %%% "upickle" % "0.2.8",
+    libraryDependencies += "com.lihaoyi" %%% "upickle" % "0.3.0",
     publishTo := Some(Resolver.file("file", new File(Path.userHome.absolutePath+"/.m2/repository")))
   )//.jvmSettings().jsSettings()
 

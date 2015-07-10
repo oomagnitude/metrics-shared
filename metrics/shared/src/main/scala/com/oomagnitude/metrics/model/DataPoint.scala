@@ -1,7 +1,13 @@
 package com.oomagnitude.metrics.model
+import upickle.default._
+import upickle.{default => upickle}
 
 object DataPoint {
   def zero[T](implicit z: T) = DataPoint(0, z)
+
+  def read[T: Reader](json: String): DataPoint[T] = upickle.read[DataPoint[T]](json)
+  def write[T: Writer](dataPoint: DataPoint[T]): String = upickle.write(dataPoint)
+  def write[T: Writer](timestep: Int, sample: T): String = write(DataPoint(timestep, sample))
 }
 
 /**

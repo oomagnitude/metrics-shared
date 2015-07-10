@@ -1,8 +1,7 @@
 package com.oomagnitude.metrics.model
 
-import com.oomagnitude.metrics.model.ext._
-import com.oomagnitude.metrics.model.geometry.Geometry2D
-import upickle.key
+import com.oomagnitude.metrics.model.geometry.{Coordinate2D, Geometry2D}
+import derive.key
 import scala.language.implicitConversions
 
 // NOTE: both TimeUnit and Interpretation must live in the same file due to this issue:
@@ -35,10 +34,16 @@ object Metrics {
   @key("scalar")
   case class Scalar(value: Double) extends Sample
 
+  // Need to keep these in the same file due to https://github.com/lihaoyi/upickle-pprint/issues/95, which will be fixed in 0.3.1
+  case class MutualInfo(cells: (String, String), jc: Double, ejc: Double)
+  case class CellInfo(id: String, numConnections: Int)
   object MutualInfos {val zero = MutualInfos(List.empty, List.empty)}
   @key("mutualInformation")
   case class MutualInfos(cells: List[CellInfo], links: List[MutualInfo]) extends Sample
 
+
+  case class Gaussian(mean: Double, precision: Double)
+  case class LocatableGaussian(location: Coordinate2D, gaussian: Gaussian)
   object LabeledGaussians {val zero = LabeledGaussians(List.empty)}
   @key("labeledGaussians")
   case class LabeledGaussians(gaussians: List[(String, List[LocatableGaussian])]) extends Sample
@@ -50,6 +55,11 @@ object Metrics {
   object ActionTrigger {val zero = ActionTrigger(NoAction)}
   @key("actionTrigger")
   case class ActionTrigger(trigger: Trigger) extends Sample
+
+  object Sample {
+    def read(json: String): Sample = upickle.default.read[Sample](json)
+    def write(sample: Sample): String = upickle.default.write(sample)
+  }
 
   sealed trait TimeUnit
   @key("nanoseconds") case object Nanoseconds extends TimeUnit
@@ -97,9 +107,8 @@ object Metrics {
   case class MetricMetadata(id: DataSourceId, zero: Sample, parameters: Option[MetricParams])
 
   object MetricMetadata {
-    implicit class MetaExt(meta: MetricMetadata) {
-      def json: String = upickle.write(meta)
-    }
+    def write(metadata: MetricMetadata): String = upickle.default.write(metadata)
+    def read(json: String): MetricMetadata = upickle.default.read[MetricMetadata](json)
   }
 
 }

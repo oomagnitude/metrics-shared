@@ -3,6 +3,7 @@ package com.oomagnitude.metrics.model
 import com.oomagnitude.metrics.model.ext._
 import com.oomagnitude.metrics.model.geometry.Geometry2D
 import upickle.key
+import scala.language.implicitConversions
 
 // NOTE: both TimeUnit and Interpretation must live in the same file due to this issue:
 // https://github.com/lihaoyi/upickle/issues/68, which was originally caused by:

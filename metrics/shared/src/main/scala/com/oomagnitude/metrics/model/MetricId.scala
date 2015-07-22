@@ -15,5 +15,9 @@ case class MetricId(path: List[String], separator: String = MetricId.separator) 
     case list => Some(MetricId(list.reverse.tail.reverse))
   }
 
+  def startsWith(other: MetricId): Boolean = {
+    path.size >= other.path.size && other.path.indices.forall(i => path(i) == other.path(i))
+  }
+
   override val toString = path.mkString(separator)
 }

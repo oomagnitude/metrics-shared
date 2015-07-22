@@ -1,7 +1,8 @@
 package com.oomagnitude.metrics.model
 
-import com.oomagnitude.metrics.model.geometry.{Coordinate2D, Geometry2D}
+import com.oomagnitude.metrics.model.geometry.Geometry2D
 import derive.key
+
 import scala.language.implicitConversions
 
 // NOTE: both TimeUnit and Interpretation must live in the same file due to this issue:
@@ -43,10 +44,11 @@ object Metrics {
 
 
   case class Gaussian(mean: Double, precision: Double)
-  case class LocatableGaussian(location: Coordinate2D, gaussian: Gaussian)
-  object LabeledGaussians {val zero = LabeledGaussians(List.empty)}
+  object LabeledGaussians {val zero = LabeledGaussians("", scala.Vector.empty, scala.Vector.empty)}
   @key("labeledGaussians")
-  case class LabeledGaussians(gaussians: List[(String, List[LocatableGaussian])]) extends Sample
+  case class LabeledGaussians(label: String,
+                              gaussians: scala.Vector[scala.Vector[Gaussian]],
+                              samples: scala.Vector[scala.Vector[Gaussian]]) extends Sample
 
   object Vector {val zero = Vector(Seq.empty)}
   @key("vector")

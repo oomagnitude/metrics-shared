@@ -1,7 +1,13 @@
 package com.oomagnitude.metrics
 
+import java.io.File
+import java.nio.file.Paths
+import java.nio.{file => nio}
+
 import ammonite.{ops => amm}
 import com.oomagnitude.metrics.model.{DataSourceId, ExperimentId, ExperimentRunId}
+
+import scala.language.implicitConversions
 
 package object filesystem {
 
@@ -32,5 +38,9 @@ package object filesystem {
     def jsonPath: amm.Path = id.experimentRunId.metricsPath / jsonFilename
     def metaPath: amm.Path = id.experimentRunId.metricsPath / metaFilename
   }
+
+  implicit def pathToPath(path: amm.Path): nio.Path = Paths.get(File.separator + path.segments.mkString(File.separator))
+
+  implicit def pathToFile(path: amm.Path): File = pathToPath(path).toFile
 
 }

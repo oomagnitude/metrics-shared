@@ -10,7 +10,30 @@ lazy val metrics = crossProject
     libraryDependencies ++= Seq(
       "com.lihaoyi" %%% "upickle" % "0.3.0"
     ),
-    publishTo := Some(Resolver.file("file", new File(Path.userHome.absolutePath+"/.m2/repository")))
+    licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    homepage := Some(url("https://github.com/oomagnitude/metrics-shared")),
+    publishMavenStyle := true,
+    publishArtifact in Test := false,
+    pomIncludeRepository := { _ => false },
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (isSnapshot.value)
+        Some("snapshots" at nexus + "content/repositories/snapshots")
+      else
+        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    },
+    pomExtra := (
+        <scm>
+          <url>git@github.com:oomagnitude/metrics-shared.git</url>
+          <connection>scm:git:git@github.com:oomagnitude/metrics-shared.git</connection>
+        </scm>
+        <developers>
+          <developer>
+            <id>yakticus</id>
+            <name>Julie Pitt</name>
+            <url>http://oomagnitude.com</url>
+          </developer>
+        </developers>)
   ).jvmSettings(
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "ammonite-ops" % "0.4.5"

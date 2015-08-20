@@ -8,7 +8,7 @@ lazy val metrics = crossProject
     scalaVersion := "2.11.6",
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %%% "upickle" % "0.3.0"
+      "com.lihaoyi" %%% "upickle" % "0.3.5"
     ),
     licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     homepage := Some(url("https://github.com/oomagnitude/metrics-shared")),

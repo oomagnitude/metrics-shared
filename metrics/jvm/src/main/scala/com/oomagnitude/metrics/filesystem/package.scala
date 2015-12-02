@@ -18,10 +18,10 @@ package object filesystem {
 
   /**
    * Base path for experiment data. The model and results are resolved relative to this path.
-   * If the `CLA_EXP` environment variable is set, base path will be set to it. Otherwise
+   * If the `METRICS_ROOT` environment variable is set, base path will be set to it. Otherwise
    * the current working directory is used.
    */
-  val ResultsPath = pathOf("CLA_EXP") / 'results
+  val ResultsPath = pathOf("METRICS_ROOT")
 
   implicit class ExperimentIdExt(id: ExperimentId) {
     def path: amm.Path = ResultsPath / id.experiment

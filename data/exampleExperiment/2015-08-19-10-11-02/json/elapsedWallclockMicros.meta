@@ -1,0 +1,1 @@
+{"id":{"experimentRunId":{"experimentId":{"experiment":"exampleExperiment"},"date":"2015-08-19-10-11-02"},"metricId":{"path":["elapsedWallclockMicros"]}},"zero":{"$type":"time","elapsed":0,"count":0},"parameters":[{"$type":"timeParams","units":{"$type":"microseconds"}}]}

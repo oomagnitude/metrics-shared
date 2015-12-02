@@ -1,0 +1,1 @@
+{"id":{"experimentRunId":{"experimentId":{"experiment":"exampleExperiment"},"date":"2015-08-19-10-11-02"},"metricId":{"path":["requestsPerSecond"]}},"zero":{"$type":"scalar","value":0},"parameters":[]}

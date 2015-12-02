@@ -16,7 +16,7 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 
 ## metric data setup
 
-You need to specify a directory on your local machine where the JSON metrics to visualize are stored. Do this
+You need to specify a directory on your local machine where the JSON metrics are stored. Do this
 by setting the environment variable `METRICS_ROOT`. The application will expect the following directory structure:
 
 ```
@@ -26,7 +26,7 @@ METRICS_ROOT/<expname>/<date>/
 - `<expname>` is a human-readable name for the type of experiment being run. This corresponds to the field `ExperimentId.experiment` in the data model
 - `<date>` is a string-serialized ISO date in the form `YYYY-MM-dd-HH-mm-ss`. This corresponds to the field `ExperimentRunId.date` in the data model
 
-Under the `results/<expname>/<date>/` directory is a directory called `json` which contains individual metrics
+Under the `METRICS_ROOT/<expname>/<date>/` directory is a directory called `json` which contains individual metrics
 in the form of timeseries. The filenames take the form `<metricname>.json`, which contains the timeseries data,
 with each line of the file being a complete JSON object. There is another file next to it called `<metricname>.meta`
 which contains meta information about the metric. Note that `<metricname>` corresponds to `DataSourceId.metricId` in the data model.

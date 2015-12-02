@@ -32,8 +32,7 @@ with each line of the file being a complete JSON object. There is another file n
 which contains meta information about the metric. Note that `<metricname>` corresponds to `DataSourceId.metricId` in the data model.
 
 The JSON files are serialized objects by the [µpickle](https://github.com/lihaoyi/upickle) library. The data 
-objects are specified in the [metrics-shared](https://github.com/oomagnitude/metrics-shared)
-project and take the form `DataPoint[T]`. The time raster is in arbitrary units called `timestep`. 
+objects take the form `DataPoint[T]`. The time raster is in arbitrary units called `timestep`.
 
 ### example data
 
